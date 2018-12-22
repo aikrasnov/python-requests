@@ -1,0 +1,18 @@
+[requires]
+python_full_version = "3.7"
+
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+flake8 = "*"
+flake8-quotes = "*"
+
+[packages]
+requests = "==2.21.0"
+pytest = "==4.0.1"
+pytest-rerunfailures = "==5.0"
+pytest-xdist = "==1.25.0"
+pytest-allure-adaptor = "==1.7.10"

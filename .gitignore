@@ -1,0 +1,21 @@
+# Файлы и папки операционной системы
+.DS_Store
+Thumbs.db
+
+# Файлы редактора
+.idea
+
+# Вспомогательные файлы
+*.log
+npm-debug.log*
+node_modules/
+
+# Локальные файлы конфигураций
+.env
+
+/src/coverage
+/coverage
+/venv
+/.pytest_cache
+/report
+/allure-report
