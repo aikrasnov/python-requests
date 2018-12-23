@@ -12,6 +12,7 @@ flake8-quotes = "*"
 
 [packages]
 requests = "==2.21.0"
+curlify = "==2.1.0"
 pytest = "==4.0.1"
 pytest-rerunfailures = "==5.0"
 pytest-xdist = "==1.25.0"

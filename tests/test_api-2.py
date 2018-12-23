@@ -1,6 +1,6 @@
 import re
-import requests
 import pytest
+from src.requests import get
 
 
 @pytest.allure.testcase("http://test-tracker/api-2")
@@ -8,10 +8,21 @@ import pytest
 @pytest.mark.parametrize("date", ["latest", "2018-12-22"])
 def test_api_2(base, date):
     default_base = "EUR"
-    symbols = ['CZK', 'TOP', 'ETB', 'MZN', 'XAU', 'BOB', 'MVR', 'SCR', 'NIO', 'SGD', 'ALL', 'BDT', 'DZD', 'IMP', 'IRR', 'SBD', 'ANG', 'XAG', 'SDG', 'XAF', 'GHS', 'ILS', 'MKD', 'GIP', 'USD', 'ISK', 'SAR', 'QAR', 'HTG', 'SRD', 'LAK', 'PHP', 'STD', 'NZD', 'SHP', 'CUP', 'INR', 'JMD', 'CNY', 'DJF', 'KES', 'XDR', 'GNF', 'TJS', 'TZS', 'BRL', 'KMF', 'CUC', 'VEF', 'SEK', 'BMD', 'GEL', 'ZWL', 'MOP', 'UAH', 'XCD', 'AWG', 'OMR', 'MGA', 'MRO', 'PYG', 'JOD', 'FKP', 'AOA', 'BTN', 'MNT', 'SZL', 'BGN', 'AUD', 'RWF', 'YER', 'SYP', 'CVE', 'BSD', 'BAM', 'GYD', 'HUF', 'BZD', 'WST', 'TND', 'BWP', 'HNL', 'KZT', 'KHR', 'LYD', 'PKR', 'UGX', 'UYU', 'LRD', 'MUR', 'MDL', 'RSD', 'BYR', 'DKK', 'VUV', 'KPW', 'JPY', 'CLP', 'CRC', 'KGS', 'PAB', 'ZMK', 'MYR', 'CHF', 'RON', 'KYD', 'LKR', 'XPF', 'FJD', 'NPR', 'GBP', 'JEP', 'PGK', 'BBD', 'TWD', 'GMD', 'AZN', 'KRW', 'COP', 'LBP', 'KWD', 'IDR', 'UZS', 'NGN', 'GGP', 'AFN', 'HKD', 'SOS', 'ZAR', 'TMT', 'BTC', 'LVL', 'BND', 'TRY', 'THB', 'GTQ', 'AED', 'SVC', 'LSL', 'MXN', 'MAD', 'DOP', 'NOK', 'HRK', 'CDF', 'MWK', 'EGP', 'IQD', 'SLL', 'RUB', 'ERN', 'XOF', 'ARS', 'PEN', 'TTD', 'BYN', 'ZMW', 'PLN', 'AMD', 'MMK', 'VND', 'NAD', 'LTL', 'CLF', 'CAD', 'BHD', 'BIF', 'EUR']
+    symbols = ["CZK", "TOP", "ETB", "MZN", "XAU", "BOB", "MVR", "SCR", "NIO", "SGD", "ALL", "BDT", "DZD", "IMP", "IRR",
+               "SBD", "ANG", "XAG", "SDG", "XAF", "GHS", "ILS", "MKD", "GIP", "USD", "ISK", "SAR", "QAR", "HTG", "SRD",
+               "LAK", "PHP", "STD", "NZD", "SHP", "CUP", "INR", "JMD", "CNY", "DJF", "KES", "XDR", "GNF", "TJS", "TZS",
+               "BRL", "KMF", "CUC", "VEF", "SEK", "BMD", "GEL", "ZWL", "MOP", "UAH", "XCD", "AWG", "OMR", "MGA", "MRO",
+               "PYG", "JOD", "FKP", "AOA", "BTN", "MNT", "SZL", "BGN", "AUD", "RWF", "YER", "SYP", "CVE", "BSD", "BAM",
+               "GYD", "HUF", "BZD", "WST", "TND", "BWP", "HNL", "KZT", "KHR", "LYD", "PKR", "UGX", "UYU", "LRD", "MUR",
+               "MDL", "RSD", "BYR", "DKK", "VUV", "KPW", "JPY", "CLP", "CRC", "KGS", "PAB", "ZMK", "MYR", "CHF", "RON",
+               "KYD", "LKR", "XPF", "FJD", "NPR", "GBP", "JEP", "PGK", "BBD", "TWD", "GMD", "AZN", "KRW", "COP", "LBP",
+               "KWD", "IDR", "UZS", "NGN", "GGP", "AFN", "HKD", "SOS", "ZAR", "TMT", "BTC", "LVL", "BND", "TRY", "THB",
+               "GTQ", "AED", "SVC", "LSL", "MXN", "MAD", "DOP", "NOK", "HRK", "CDF", "MWK", "EGP", "IQD", "SLL", "RUB",
+               "ERN", "XOF", "ARS", "PEN", "TTD", "BYN", "ZMW", "PLN", "AMD", "MMK", "VND", "NAD", "LTL", "CLF", "CAD",
+               "BHD", "BIF", "EUR"]
 
     url = f"{base['url']}{date}?access_key={base['access_key']}"
-    response: dict = requests.get(url).json()
+    response: dict = get(url).json()
 
     assert response["success"] is True, "should have success == true"
     assert bool(re.match(r"^\d+$", str(response["timestamp"]))), "should have timestamp"

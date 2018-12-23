@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "e714a4014c996a8fa146e3e8b247532580a06a2b8082d84708880b7b97c715a2"
+            "sha256": "550e5556c9ebacb4e7425f270cf31ff3c0ca56f582194ba819634c7e93c8e090"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -50,6 +50,13 @@
                 "sha256:fc323ffcaeaed0e0a02bf4d117757b98aed530d9ed4531e3e15460124c106691"
             ],
             "version": "==3.0.4"
+        },
+        "curlify": {
+            "hashes": [
+                "sha256:bc9ad39311fa32661cd5640a81740d4f7afeb7fc42178d21502b07e06a18a5d5"
+            ],
+            "index": "pypi",
+            "version": "==2.1.0"
         },
         "enum34": {
             "hashes": [

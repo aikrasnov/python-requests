@@ -1,4 +1,4 @@
-import requests
+from src.requests import get
 import pytest
 import datetime
 
@@ -10,7 +10,8 @@ def test_api_1(base):
     now = datetime.datetime.now()
     today = f"{now.year}-{now.month}-{now.day}"
 
-    response: dict = requests.get(url).json()
+    response: dict = get(url).json()
 
+    assert response["success"] is True, "should have success == true"
     assert response["date"] == today, f"should have date equal {today}"
     assert "historical" not in response, "should not have 'historical' key"
