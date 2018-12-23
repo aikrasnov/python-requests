@@ -2,6 +2,8 @@
 
 ## Как запустить тесты
 ### Локально
-1) Склонировать репу
-2) Установить pipenv ([инструкция](https://github.com/pypa/pipenv#installation))
-3) Запустить `pipenv install --dev && pipenv run pytest`
+0) Получить доступ к апи на https://fixer.io/dashboard
+1) Установить переменую окружения ACCESS_KEY
+2) Склонировать репу
+3) Установить pipenv ([инструкция](https://github.com/pypa/pipenv#installation))
+4) Запустить `pipenv install --dev && pipenv run pytest`
