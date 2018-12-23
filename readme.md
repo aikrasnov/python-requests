@@ -15,3 +15,6 @@
 
 ### Ретраи и параллельность
 [Ретраи](https://pypi.org/project/pytest-rerunfailures/), [параллельность](https://pypi.org/project/pytest-xdist/)
+
+### Напечатать курл
+`pipenv run pytest --showcurl` выведет курл для каждого запроса

@@ -1,4 +1,4 @@
-from src.requests import get
+from config.config import ACCESS_KEY
 import pytest
 
 
@@ -6,9 +6,9 @@ import pytest
 @pytest.allure.feature("API-7: /{date}/ запрос c невалидным access_key")
 @pytest.mark.parametrize("date", ["latest", "2008-09-29"])
 @pytest.mark.parametrize("invalid_access_key", ["'select", "`", "foobar", "{"])
-def test_api_7(base, date, invalid_access_key):
-    url = f"{base['url']}{date}?access_key={invalid_access_key}"
-    response: dict = get(url).json()
+def test_api_7(requests, date, invalid_access_key):
+    path = f"{date}?access_key={invalid_access_key}"
+    response: dict = requests.get(path).json()
 
     assert response["success"] is False, "should have success == false"
     assert type(response["error"] is dict), "should have error in response"

@@ -1,12 +1,12 @@
 import re
 import pytest
-from src.requests import get
+from config.config import ACCESS_KEY
 
 
 @pytest.allure.testcase("http://test-tracker/api-2")
 @pytest.allure.feature("API-2: /{date}/ схема ответа")
 @pytest.mark.parametrize("date", ["latest", "2018-12-22"])
-def test_api_2(base, date):
+def test_api_2(requests, date):
     default_base = "EUR"
     symbols = ["CZK", "TOP", "ETB", "MZN", "XAU", "BOB", "MVR", "SCR", "NIO", "SGD", "ALL", "BDT", "DZD", "IMP", "IRR",
                "SBD", "ANG", "XAG", "SDG", "XAF", "GHS", "ILS", "MKD", "GIP", "USD", "ISK", "SAR", "QAR", "HTG", "SRD",
@@ -21,8 +21,8 @@ def test_api_2(base, date):
                "ERN", "XOF", "ARS", "PEN", "TTD", "BYN", "ZMW", "PLN", "AMD", "MMK", "VND", "NAD", "LTL", "CLF", "CAD",
                "BHD", "BIF", "EUR"]
 
-    url = f"{base['url']}{date}?access_key={base['access_key']}"
-    response: dict = get(url).json()
+    path = f"{date}?access_key={ACCESS_KEY}"
+    response: dict = requests.get(path).json()
 
     assert response["success"] is True, "should have success == true"
     assert bool(re.match(r"^\d+$", str(response["timestamp"]))), "should have timestamp"

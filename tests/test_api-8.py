@@ -1,4 +1,4 @@
-from src.requests import get
+from config.config import ACCESS_KEY
 import pytest
 
 
@@ -6,9 +6,9 @@ import pytest
 @pytest.allure.feature("API-8: /{date}/ запрос c не дефолтным base")
 @pytest.mark.parametrize("date", ["latest", "2004-03-19"])
 @pytest.mark.parametrize("api_base", ["BAM", "MDL", "XOF"])
-def test_api_8(base, date, api_base):
-    url = f"{base['url']}{date}?access_key={base['access_key']}&base={api_base}"
-    response: dict = get(url).json()
+def test_api_8(requests, date, api_base):
+    path = f"{date}?access_key={ACCESS_KEY}&base={api_base}"
+    response: dict = requests.get(path).json()
 
     assert response["success"] is False, "should have success == false"
     assert type(response["error"] is dict), "should have error in response"

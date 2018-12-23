@@ -1,13 +1,13 @@
-from src.requests import get
+from config.config import ACCESS_KEY
 import pytest
 
 
 @pytest.allure.testcase("http://test-tracker/api-6")
 @pytest.allure.feature("API-6: /{date}/ запрос без access_key")
 @pytest.mark.parametrize("date", ["latest", "2018-10-30"])
-def test_api_6(base, date):
-    url = f"{base['url']}{date}"
-    response: dict = get(url).json()
+def test_api_6(requests, date):
+    path = f"{date}"
+    response: dict = requests.get(path).json()
 
     assert response["success"] is False, "should have success == false"
     assert type(response["error"] is dict), "should have error in response"

@@ -1,4 +1,4 @@
-from src.requests import get
+from config.config import ACCESS_KEY
 import pytest
 
 
@@ -6,9 +6,9 @@ import pytest
 @pytest.allure.feature("API-9: /{date}/ запрос c инвалидным base")
 @pytest.mark.parametrize("date", ["latest", "2014-06-15"])
 @pytest.mark.parametrize("api_base", ["123", "foo", "'select", "["])
-def test_api_9(base, date, api_base):
-    url = f"{base['url']}{date}?access_key={base['access_key']}&base={api_base}"
-    response: dict = get(url).json()
+def test_api_9(requests, date, api_base):
+    path = f"{date}?access_key={ACCESS_KEY}&base={api_base}"
+    response: dict = requests.get(path).json()
 
     assert response["success"] is False, "should have success == false"
     assert type(response["error"] is dict), "should have error in response"
